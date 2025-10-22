@@ -1,5 +1,10 @@
+import Banner from "@/components/Banner";
 import Image from "next/image";
 
 export default function Home() {
-  return <section>Project Created</section>;
+  return (
+    <section>
+      <Banner></Banner>
+    </section>
+  );
 }

@@ -1,10 +1,13 @@
-// import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import NavBar from "@/components/NavBar";
 import "./globals.css";
+import SliderLoader from "@/components/SliderLoader";
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-montserrat",
+});
 
 export const metadata = {
   title:
@@ -16,7 +19,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="max-w-[1536px] w-full border mx-auto">{children}</body>
+      <body className={`max-w-[1536px] w-full mx-auto ${montserrat.variable}`}>
+        <SliderLoader>
+          <NavBar />
+          <section>{children}</section>
+        </SliderLoader>
+      </body>
     </html>
   );
 }
