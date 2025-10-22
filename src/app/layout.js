@@ -3,6 +3,7 @@ import NavBar from "@/components/NavBar";
 import "./globals.css";
 import SliderLoader from "@/components/SliderLoader";
 import ScrollSmooth from "@/components/ScrollSmooth";
+import Footer from "@/components/Footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
             <NavBar />
             <section>{children}</section>
           </SliderLoader>
+          <Footer></Footer>
         </ScrollSmooth>
       </body>
     </html>

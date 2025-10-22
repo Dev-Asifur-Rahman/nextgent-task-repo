@@ -51,4 +51,21 @@ body {
   object-fit: cover;
 }
 
+#footer-section p {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+#footer-section span {
+  color: black;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
