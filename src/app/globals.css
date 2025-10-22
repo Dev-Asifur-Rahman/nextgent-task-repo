@@ -21,14 +21,34 @@
   }
 }
 
+ 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-montserrat);
 }
 
+
 .line {
   width: 100%;
   background: white;
   height: 1px;
 }
+
+.swiper{
+  height: 100%;
+  width: 100%;
+}
+
+.swiper-slide{
+  height: 100%;
+  width: 100%;
+}
+
+.swiper-slide img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+

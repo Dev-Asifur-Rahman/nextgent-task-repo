@@ -2,6 +2,7 @@ import { Montserrat } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import "./globals.css";
 import SliderLoader from "@/components/SliderLoader";
+import ScrollSmooth from "@/components/ScrollSmooth";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -20,10 +21,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`max-w-[1536px] w-full mx-auto ${montserrat.variable}`}>
-        <SliderLoader>
-          <NavBar />
-          <section>{children}</section>
-        </SliderLoader>
+        <ScrollSmooth>
+          <SliderLoader>
+            <NavBar />
+            <section>{children}</section>
+          </SliderLoader>
+        </ScrollSmooth>
       </body>
     </html>
   );

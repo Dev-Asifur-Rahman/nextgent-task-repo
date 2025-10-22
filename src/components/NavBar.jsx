@@ -1,29 +1,84 @@
+"use client";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
 
 const NavBar = () => {
+  const navRef = useRef(null);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY - lastScrollY.current > 10) {
+        gsap.killTweensOf(navRef.current);
+        gsap.to(navRef.current, {
+          y: "-100%",
+          duration: 0.6,
+          ease: "power2.out",
+          backgroundColor: "transparent",
+          backdropFilter: "blur(0px)",
+        });
+      } else if (lastScrollY.current - currentScrollY > 10) {
+        gsap.killTweensOf(navRef.current);
+        gsap.to(navRef.current, {
+          y: "0%",
+          duration: 0.6,
+          ease: "power2.out",
+
+          backgroundColor: "rgba(0,0,0,0.7)",
+          backdropFilter: "blur(10px)",
+        });
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="h-20 w-full fixed top-0 flex justify-center">
-      <div className="h-full w-[85%]  flex items-center justify-between font-medium text-base   text-white">
-        {/* logo */}
-        <div className="bg-black w-fit">
-          <img
-            src="https://jcxbd.com/wp-content/uploads/2021/09/logo.svg"
-            alt=""
-            className="w-[125px] lg:w-[125px] h-[55px] md:w-[70px]"
-          />
+    <section
+      ref={navRef}
+      className="h-20 w-full fixed top-0 flex justify-center z-50"
+      onMouseEnter={() => {
+        gsap.to(navRef.current, {
+          backgroundColor: "black",
+          backdropFilter: "blur(100px)",
+          duration: 0.6,
+        });
+      }}
+      onMouseLeave={() => {
+        gsap.to(navRef.current, {
+          backgroundColor: "rgba(0,0,0,0.7)",
+          backdropFilter: "blur(10px)",
+          duration: 0.6,
+        });
+      }}
+    >
+      <div className="h-full w-[85%] flex items-center justify-between  text-base text-white ">
+        <div className=" w-fit">
+          <Link href="/">
+            <img
+              src="https://jcxbd.com/wp-content/uploads/2021/09/logo.svg"
+              alt=""
+              className="w-[125px] lg:w-[125px] h-[55px] md:w-[70px]"
+            />
+          </Link>
         </div>
         <section className="flex lg:justify-between md:justify-between justify-end items-center w-3/5 md:w-4/5 lg:w-3/5">
-          {/* links */}
           <div className="items-center md:inline-flex hidden lg:inline-flex">
-            <p className="pr-[30px] border-r w-fit">
-              <Link href={"/properties"}>RESIDENTIAL</Link>{" "}
+            <p className="pr-[30px] border-r w-fit hover:text-[#AC9486]">
+              <Link href="/properties">RESIDENTIAL</Link>
             </p>
-            <p className="ml-[30px]">
-              <Link href={"/properties"}>COMMERCIAL</Link>
+            <p className="ml-[30px] hover:text-[#AC9486]">
+              <Link href="/properties">COMMERCIAL</Link>
             </p>
           </div>
-          {/* calls  */}
-          <div className="lg:inline-flex md:inline-flex items-center gap-3 hidden ">
+          <div className="lg:inline-flex md:inline-flex items-center gap-3 hidden hover:text-[#AC9486]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -38,13 +93,12 @@ const NavBar = () => {
             </svg>
             <p>16777</p>
           </div>
-          {/* menu  */}
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 group cursor-pointer hover:text-[#AC9486]">
             <p>MENU</p>
-            <div className="w-[30px] h-[18px] flex flex-col justify-evenly">
-              <p className="line"></p>
-              <p className="line"></p>
-              <p className="line"></p>
+            <div  className="w-[30px] h-[18px] flex flex-col justify-evenly">
+              <p className="h-[2px] bg-white w-full transition-transform duration-700 transform origin-right "></p>
+              <p className="h-[2px] bg-white w-full transition-transform duration-700 transform origin-right group-hover:scale-x-50"></p>
+              <p className="h-[2px] bg-white w-full transition-transform duration-700 transform origin-right group-hover:scale-x-25"></p>
             </div>
           </div>
         </section>

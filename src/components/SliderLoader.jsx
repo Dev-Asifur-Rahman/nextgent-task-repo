@@ -19,13 +19,12 @@ export default function SliderLoader({ children }) {
     if (!firstLoad.current) return;
 
     const tl = gsap.timeline();
-    tl.set(panelsRef.current, { y: 0 })
-      .to(panelsRef.current, {
-        y: "-100%", 
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power2.inOut",
-      });
+    tl.set(panelsRef.current, { y: 0 }).to(panelsRef.current, {
+      y: "-100%",
+      duration: 0.6,
+      stagger: 0.08,
+      ease: "power2.inOut",
+    });
 
     firstLoad.current = false;
   }, []);
@@ -34,7 +33,7 @@ export default function SliderLoader({ children }) {
   const navigateWithShutter = (href) => {
     const tl = gsap.timeline({
       onComplete: () => {
-        router.push(href); 
+        router.push(href);
         // Reveal bars after navigation
         gsap.to(panelsRef.current, {
           y: "-100%",
@@ -47,13 +46,12 @@ export default function SliderLoader({ children }) {
     });
 
     // Bars come down to cover current page
-    tl.set(panelsRef.current, { y: "-100%" })
-      .to(panelsRef.current, {
-        y: 0, 
-        duration: 0.5,
-        stagger: 0.08,
-        ease: "power2.inOut",
-      });
+    tl.set(panelsRef.current, { y: "-100%" }).to(panelsRef.current, {
+      y: 0,
+      duration: 0.5,
+      stagger: 0.08,
+      ease: "power2.inOut",
+    });
   };
 
   // 🔹 Intercept internal links automatically
@@ -77,7 +75,7 @@ export default function SliderLoader({ children }) {
             key={i}
             ref={addToRefs}
             style={{ width: `${100 / panelsCount}%` }}
-            className="h-full bg-black"
+            className="h-full bg-[#1B1B1B]"
           />
         ))}
       </div>
