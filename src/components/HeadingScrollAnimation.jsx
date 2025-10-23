@@ -16,16 +16,16 @@ const HeadingScrollAnimation = ({
   useEffect(() => {
     gsap.fromTo(
       textRef.current,
-      { y: 20, opacity: 0, duration: 0.6 },
+      { y: 40, opacity: 0, duration: 0.6 },
       {
         y: 0,
         opacity: 1,
-        duration: 1,
-        delay: 2,
+        duration: 0.6,
+        delay: 1,
         ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 90%",
+          start: "top 80%",
           toggleActions: "play reverse play reverse",
         },
       }
@@ -33,24 +33,27 @@ const HeadingScrollAnimation = ({
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="lg:h-24 text-center w-full flex flex-col gap-1 justify-center items-center"
-    >
-      <p
-        ref={textRef}
-        className={`${
-          color === true ? "text-white" : "text-[#8E8F8F]"
-        } lg:text-4xl md:text-3xl text-xl`}
+    <section className="w-full h-48 border relative">
+      <div
+        ref={containerRef}
+        className="lg:h-24 text-center w-full flex flex-col gap-1 justify-end items-center border absolute top-0 z-0"
       >
-        {text}
-      </p>
-      <span
-        className={`${
-          color === true ? "bg-red-600" : "bg-blue-600"
-        } h-[7px] w-[50px]`}
-      ></span>
-    </div>
+        <p
+          ref={textRef}
+          className={`${
+            color === true ? "text-white" : "text-[#8E8F8F]"
+          } lg:text-4xl md:text-3xl text-xl`}
+        >
+          {text}
+        </p>
+        <span
+          className={`${
+            color === true ? "bg-red-600" : "bg-blue-600"
+          } h-[7px] w-[50px]`}
+        ></span>
+      </div>
+      <div className="absolute w-full h-24 bottom-0 z-10 bg-black"></div>
+    </section>
   );
 };
 
