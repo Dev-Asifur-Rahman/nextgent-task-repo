@@ -9,7 +9,7 @@ const BasisOfOurBeliefs = () => {
         bg={"black"}
         color={true}
         text="THE BASIS OF OUR BELIEFS"
-      ></HeadingScrollAnimation>
+      bgcolor={'#000000'}></HeadingScrollAnimation>
       <div className="lg:h-screen w-full lg:relative flex flex-col-reverse md:flex-col">
         <TextTabSection></TextTabSection>
         <img

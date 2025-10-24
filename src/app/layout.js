@@ -1,9 +1,11 @@
 import { Montserrat } from "next/font/google";
-import NavBar from "@/components/NavBar";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
 import SliderLoader from "@/components/SliderLoader";
 import ScrollSmooth from "@/components/ScrollSmooth";
 import Footer from "@/components/Footer";
+import GlobalContextProvider from "@/context/GlobalContextProvider";
+import ScrollTopIcon from "@/components/ScrollTopIcon";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -22,13 +24,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`max-w-[1536px] w-full mx-auto ${montserrat.variable}`}>
-        <ScrollSmooth>
-          <SliderLoader>
-            <NavBar />
-            <section>{children}</section>
-          </SliderLoader>
-          <Footer></Footer>
-        </ScrollSmooth>
+        <GlobalContextProvider>
+          <ScrollSmooth>
+            <SliderLoader>
+              <NavBar />
+              <section>{children}</section>
+            </SliderLoader>
+            <Footer />
+          </ScrollSmooth>
+          <ScrollTopIcon></ScrollTopIcon>
+        </GlobalContextProvider>
       </body>
     </html>
   );

@@ -21,13 +21,11 @@
   }
 }
 
- 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-montserrat);
 }
-
 
 .line {
   width: 100%;
@@ -35,20 +33,30 @@ body {
   height: 1px;
 }
 
-.swiper{
+.swiper {
   height: 100%;
   width: 100%;
 }
 
-.swiper-slide{
+.swiper-slide {
   height: 100%;
   width: 100%;
 }
 
-.swiper-slide img{
+.swiper-slide img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+#perfection-slider-section .swiper {
+  border: 5x solid white;
+  height: 100%;
+  width: 100%;
+}
+
+#perfection-slider-section .swiper-slide {
+  height: 75%;
 }
 
 #footer-section p {
@@ -67,5 +75,36 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+#awards-recognition-section div {
+  width: 60%;
+  aspect-ratio: 1/0.7;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#awards-recognition-section div img{
+  height: 80%;
+  width: 80%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+#awards-recognition-section div img:hover{
+  transform: scale(1.1) ;
+}
+
+#testimonial-section .swiper{
+  margin-bottom: 20px;
+}
+
+#testimonial-section .swiper-slide{
+  width: 50%;
+  aspect-ratio: 1/0.6;
+}
+
+
 
 

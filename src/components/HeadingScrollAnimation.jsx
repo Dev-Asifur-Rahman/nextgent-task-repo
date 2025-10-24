@@ -9,6 +9,7 @@ const HeadingScrollAnimation = ({
   text = "Default Text",
   bg = true,
   color = true,
+  bgcolor,
 }) => {
   const containerRef = useRef();
   const textRef = useRef();
@@ -21,7 +22,6 @@ const HeadingScrollAnimation = ({
         y: 0,
         opacity: 1,
         duration: 0.6,
-        delay: 1,
         ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current,
@@ -33,26 +33,28 @@ const HeadingScrollAnimation = ({
   }, []);
 
   return (
-    <section className="w-full h-48 border relative">
+    <section className="w-full lg:h-48 md:h-40 h-16  relative">
       <div
         ref={containerRef}
-        className="lg:h-24 text-center w-full flex flex-col gap-1 justify-end items-center border absolute top-0 z-0"
+        className="lg:h-24 md:h-20 h-9 text-center w-full flex flex-col gap-1 justify-end items-center  absolute top-0 z-0"
       >
         <p
           ref={textRef}
           className={`${
-            color === true ? "text-white" : "text-[#8E8F8F]"
-          } lg:text-4xl md:text-3xl text-xl`}
+            color === true ? "text-white" : "text-[#1B1D1D]"
+          } lg:text-4xl md:text-3xl text-sm`}
         >
           {text}
         </p>
         <span
           className={`${
-            color === true ? "bg-red-600" : "bg-blue-600"
+            bg === true ? "bg-red-600" : "bg-blue-600"
           } h-[7px] w-[50px]`}
         ></span>
       </div>
-      <div className="absolute w-full h-24 bottom-0 z-10 bg-black"></div>
+      <div
+        className={`absolute w-full lg:h-24 md:h-20 h-9 bottom-0 z-10 bg-[${bgcolor}]`}
+      ></div>
     </section>
   );
 };
