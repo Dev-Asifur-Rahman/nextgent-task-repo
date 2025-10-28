@@ -25,14 +25,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`max-w-[1536px] w-full mx-auto ${montserrat.variable}`}>
         <GlobalContextProvider>
-          <SliderLoader>
+         
             <ScrollSmooth>
               <NavBar />
               <section>{children}</section>
+              <Footer />
             </ScrollSmooth>
-          </SliderLoader>
-          <Footer />
-
+          
           <ScrollTopIcon></ScrollTopIcon>
         </GlobalContextProvider>
       </body>

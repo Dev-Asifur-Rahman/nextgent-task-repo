@@ -8,18 +8,19 @@ import gsap from "gsap";
 const GlobalContextProvider = ({ children }) => {
   const [route, setRoute] = useState(undefined);
   const [hasReloaded, setHasReloaded] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [dynamicRouteHydration, setDynamicRouteHydration] = useState(false);
+  const firstRenderDone = useRef(false);
+  const pathname = usePathname();
 
   const contextValue = {
     route,
     setRoute,
     hasReloaded,
     setHasReloaded,
+    dynamicRouteHydration,
+    setDynamicRouteHydration,
   };
-
-  // --- Slider / Shutter Animation State ---
-  const [loading, setLoading] = useState(true);
-  const firstRenderDone = useRef(false);
-  const pathname = usePathname();
 
   const shutterRefs = useRef([]);
   shutterRefs.current = [];
@@ -35,46 +36,46 @@ const GlobalContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (!firstRenderDone.current) {
-      const timer = setTimeout(() => {
-        gsap.to(shutterRefs.current, {
-          y: "-100%",
-          duration: 0.6,
-          stagger: 0.05,
-          ease: "power2.out",
-          delay: 0.3,
-          onComplete: () => setLoading(false),
-        });
-      }, 100);
+      // const timer = setTimeout(() => {
+      //   gsap.to(shutterRefs.current, {
+      //     y: "-100%",
+      //     duration: 0.6,
+      //     stagger: 0.05,
+      //     ease: "power2.out",
+      //     delay: 0.3,
+      //     onComplete: () => setLoading(false),
+      //   });
+      // }, 100);
 
-      firstRenderDone.current = true;
+      // firstRenderDone.current = true;
       return () => clearTimeout(timer);
     } else {
       // Route change animation
-      const tl = gsap.timeline();
-      tl.fromTo(
-        routeRefs.current,
-        { y: "-100%" },
-        {
-          y: "0%",
-          duration: 0.5,
-          stagger: 0.05,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.to(routeRefs.current, {
-              y: "-100%",
-              duration: 0.5,
-              stagger: 0.05,
-              ease: "power2.in",
-            });
-          },
-        }
-      );
+      // const tl = gsap.timeline();
+      // tl.fromTo(
+      //   routeRefs.current,
+      //   { y: "-100%" },
+      //   {
+      //     y: "0%",
+      //     duration: 0.5,
+      //     stagger: 0.05,
+      //     ease: "power2.out",
+      //     onComplete: () => {
+      //       gsap.to(routeRefs.current, {
+      //         y: "-100%",
+      //         duration: 0.5,
+      //         stagger: 0.05,
+      //         ease: "power2.in",
+      //       });
+      //     },
+      //   }
+      // );
     }
   }, [pathname]);
 
   return (
     <GlobalContext.Provider value={contextValue}>
-      {loading && (
+      {/* {loading && (
         <div className="fixed top-0 left-0 w-full h-full z-50 flex pointer-events-none">
           {Array(8)
             .fill(0)
@@ -91,9 +92,8 @@ const GlobalContextProvider = ({ children }) => {
               />
             ))}
         </div>
-      )}
+      )} */}
 
-     
       <div className="fixed top-0 left-0 w-full h-full z-40 pointer-events-none flex">
         {Array(8)
           .fill(0)

@@ -9,7 +9,6 @@ const SliderLoader = ({ children }) => {
   const firstRenderDone = useRef(false);
   const pathname = usePathname();
 
-  // --- Refs for first reload pillars ---
   const shutterRefs = useRef([]);
   shutterRefs.current = [];
   const addShutterRef = (el) => {
@@ -25,40 +24,40 @@ const SliderLoader = ({ children }) => {
 
   useEffect(() => {
     if (!firstRenderDone.current) {
-      const timer = setTimeout(() => {
-        // Animate shutters first
-        gsap.to(shutterRefs.current, {
-          y: "-100%", // move up
-          duration: 0.6,
-          stagger: 0.05,
-          ease: "power2.out",
-          delay: 0.3,
-        });
-      }, 100);
-
-      firstRenderDone.current = true;
-      return () => clearTimeout(timer);
+      // const timer = setTimeout(() => {
+      //   // Animate shutters first
+      //   gsap.to(shutterRefs.current, {
+      //     y: "-100%", // move up
+      //     duration: 0.6,
+      //     stagger: 0.05,
+      //     ease: "power2.out",
+      //     delay: 0.3,
+      //   });
+      // }, 100);
+       if(pathname.includes('/projects')) alert('dynamic route')
+      // firstRenderDone.current = true;
+      // return () => clearTimeout(timer);
     } else {
       // Route change animation stays the same
-      const tl = gsap.timeline();
-      tl.fromTo(
-        routeRefs.current,
-        { y: "-100%" },
-        {
-          y: "0%",
-          duration: 0.5,
-          stagger: 0.05,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.to(routeRefs.current, {
-              y: "-100%",
-              duration: 0.5,
-              stagger: 0.05,
-              ease: "power2.in",
-            });
-          },
-        }
-      );
+      // const tl = gsap.timeline();
+      // tl.fromTo(
+      //   routeRefs.current,
+      //   { y: "-100%" },
+      //   {
+      //     y: "0%",
+      //     duration: 0.5,
+      //     stagger: 0.05,
+      //     ease: "power2.out",
+      //     onComplete: () => {
+      //       gsap.to(routeRefs.current, {
+      //         y: "-100%",
+      //         duration: 0.5,
+      //         stagger: 0.05,
+      //         ease: "power2.in",
+      //       });
+      //     },
+      //   }
+      // );
     }
   }, [pathname]);
 
